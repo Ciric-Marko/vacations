@@ -19,5 +19,7 @@ username: admin
 password: 123456
 
 Vacation requests are done in my details page (vacations/users/show/...).
-Vacation approval is also performed on user detail page if current logged in user have rights to do so. 
+Vacation approval is also performed on user detail page if current logged in user have rights to do so.
+
+.htaccess contains RewriteRule and RewriteCond for public web resources folder, so change it change it accordingly to your need. 
 
