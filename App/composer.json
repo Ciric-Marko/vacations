@@ -1,0 +1,19 @@
+{
+    "config": {
+        "vendor-dir": "./Packages/vendor"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\Core\\": ["Core/Classes/", "Core/Tests/"],
+            "App\\Vacation\\": ["Vacation/Classes/", "Core/Tests/"]
+        }
+    },
+    "require": {
+        "doctrine/dbal": "v2.5.13",
+        "doctrine/orm": "v2.5.14",
+        "klein/klein": "^2.1",
+        "symfony/yaml": "v2.8.49",
+        "twig/twig": "~1.0",
+        "firebase/php-jwt": "^3.0"
+    }
+}

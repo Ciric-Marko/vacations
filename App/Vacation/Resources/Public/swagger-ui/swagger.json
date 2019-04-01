@@ -1,0 +1,930 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "vacations",
+        "license": {
+            "name": "MIT"
+        },
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/vacations/authentication/auth.json": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Logs user into the system and get token",
+                "description": "",
+                "operationId": "loginUser",
+                "parameters": [
+                    {
+                        "name": "userName",
+                        "in": "query",
+                        "description": "The user name for login",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "username"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "The password for login in clear text",
+                        "schema": {
+                            "type": "string",
+                            "format": "password"
+                        },
+                        "label": "password"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Invalid username/password supplied"
+                    }
+                }
+            }
+        },
+        "/vacations/users/index.json": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "gets users list",
+                "description": "",
+                "operationId": "usersList",
+                "parameters": [
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/vacations/users/create.json": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "create user",
+                "description": "",
+                "operationId": "usersCreate",
+                "parameters": [
+                    {
+                        "name": "entity[firstName]",
+                        "in": "query",
+                        "description": "First name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "firstName"
+                    },
+                    {
+                        "name": "entity[lastName]",
+                        "in": "query",
+                        "description": "Last name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "lastName"
+                    },
+                    {
+                        "name": "entity[userName]",
+                        "in": "query",
+                        "description": "Username",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "userName"
+                    },
+                    {
+                        "name": "entity[password]",
+                        "in": "query",
+                        "description": "Password",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "password"
+                        },
+                        "label": "password"
+                    },
+                    {
+                        "name": "entity[repeatPassword]",
+                        "in": "query",
+                        "description": "Repeat Password",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "format": "password"
+                        },
+                        "label": "repeatPassword"
+                    },
+                    {
+                        "name": "entity[email]",
+                        "in": "query",
+                        "description": "email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "email"
+                    },
+                    {
+                        "name": "entity[admin]",
+                        "in": "query",
+                        "description": "admin",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "label": "admin"
+                    },
+                    {
+                        "name": "entity[userWhoCanApproveVacation]",
+                        "in": "query",
+                        "description": "userWhoCanApproveVacation",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "label": "userWhoCanApproveVacation"
+                    },
+                    {
+                        "name": "entity[vacationDays]",
+                        "in": "query",
+                        "description": "vacationDays",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "label": "vacationDays"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/vacations/users/update/{id}.json": {
+            "patch": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "update user",
+                "description": "",
+                "operationId": "usersUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "label": "id"
+                    },
+                    {
+                        "name": "entity[firstName]",
+                        "in": "query",
+                        "description": "First name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "firstName"
+                    },
+                    {
+                        "name": "entity[lastName]",
+                        "in": "query",
+                        "description": "Last name",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "lastName"
+                    },
+                    {
+                        "name": "entity[userName]",
+                        "in": "query",
+                        "description": "Username",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "userName"
+                    },
+                    {
+                        "name": "entity[password]",
+                        "in": "query",
+                        "description": "Password",
+                        "schema": {
+                            "type": "string",
+                            "format": "password"
+                        },
+                        "label": "password"
+                    },
+                    {
+                        "name": "entity[repeatPassword]",
+                        "in": "query",
+                        "description": "Repeat Password",
+                        "schema": {
+                            "type": "string",
+                            "format": "password"
+                        },
+                        "label": "repeatPassword"
+                    },
+                    {
+                        "name": "entity[email]",
+                        "in": "query",
+                        "description": "email",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "email"
+                    },
+                    {
+                        "name": "entity[admin]",
+                        "in": "query",
+                        "description": "admin",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "label": "admin"
+                    },
+                    {
+                        "name": "entity[userWhoCanApproveVacation]",
+                        "in": "query",
+                        "description": "userWhoCanApproveVacation",
+                        "schema": {
+                            "type": "boolean"
+                        },
+                        "label": "userWhoCanApproveVacation"
+                    },
+                    {
+                        "name": "entity[vacationDays]",
+                        "in": "query",
+                        "description": "vacationDays",
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "label": "vacationDays"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/vacations/users/show/{id}.json": {
+            "get": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "gets users details",
+                "description": "",
+                "operationId": "usersDetails",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "label": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/vacations/users/delete/{id}.json": {
+            "delete": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "delete user",
+                "description": "",
+                "operationId": "deleteUser",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "label": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/vacations/users/createVacationRequest/{id}.json": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "create vacation request for user",
+                "description": "create vacation request for user",
+                "operationId": "createVacationRequest",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "user id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "label": "id"
+                    },
+                    {
+                        "name": "entity[startDate]",
+                        "in": "query",
+                        "description": "Start Date in ATOM date format",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "startDate"
+                    },
+                    {
+                        "name": "entity[endDate]",
+                        "in": "query",
+                        "description": "End Date in ATOM date format",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "endDate"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/vacations/users/processVacationRequest/{id}.json": {
+            "post": {
+                "tags": [
+                    "users"
+                ],
+                "summary": "Process Vacation Request for user",
+                "description": "Process Vacation Request for user",
+                "operationId": "processVacationRequest",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "VacationRequest id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "label": "id"
+                    },
+                    {
+                        "name": "entity[state]",
+                        "in": "query",
+                        "description": "State (0 = Pending, 1 = Approved, 2 = Denied)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["0", "1", "2"]
+                        },
+                        "label": "state"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the user",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+
+        "/vacations/vacationRequests/index.json": {
+            "get": {
+                "tags": [
+                    "vacationRequests"
+                ],
+                "summary": "gets vacationRequests list",
+                "description": "",
+                "operationId": "vacationRequestsList",
+                "parameters": [
+
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the vacationRequest",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/vacations/vacationRequests/create.json": {
+            "post": {
+                "tags": [
+                    "vacationRequests"
+                ],
+                "summary": "create vacationRequest",
+                "description": "",
+                "operationId": "vacationRequestsCreate",
+                "parameters": [
+                    {
+                        "name": "entity[startDate]",
+                        "in": "query",
+                        "description": "Start Date in ATOM date format",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "startDate"
+                    },
+                    {
+                        "name": "entity[endDate]",
+                        "in": "query",
+                        "description": "End Date in ATOM date format",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "endDate"
+                    },
+                    {
+                        "name": "entity[user]",
+                        "in": "query",
+                        "description": "user id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "user"
+                    },
+                    {
+                        "name": "entity[state]",
+                        "in": "query",
+                        "description": "State (0 = Pending, 1 = Approved, 2 = Denied)",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "enum": ["0", "1", "2"]
+                        },
+                        "label": "state"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the vacationRequest",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/vacations/vacationRequests/update/{id}.json": {
+            "patch": {
+                "tags": [
+                    "vacationRequests"
+                ],
+                "summary": "update vacationRequest",
+                "description": "",
+                "operationId": "vacationRequestsUpdate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "vacationRequest id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "label": "id"
+                    },
+                    {
+                        "name": "entity[startDate]",
+                        "in": "query",
+                        "description": "Start Date in ATOM date format",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "startDate"
+                    },
+                    {
+                        "name": "entity[endDate]",
+                        "in": "query",
+                        "description": "End Date in ATOM date format",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "endDate"
+                    },
+                    {
+                        "name": "entity[user]",
+                        "in": "query",
+                        "description": "user id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "label": "user"
+                    },
+                    {
+                        "name": "entity[state]",
+                        "in": "query",
+                        "description": "State (0 = Pending, 1 = Approved, 2 = Denied)",
+                        "schema": {
+                            "type": "string",
+                            "enum": ["0", "1", "2"]
+                        },
+                        "label": "state"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the vacationRequest",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/vacations/vacationRequests/show/{id}.json": {
+            "get": {
+                "tags": [
+                    "vacationRequests"
+                ],
+                "summary": "gets vacationRequests details",
+                "description": "",
+                "operationId": "vacationRequestsDetails",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "vacationRequest id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "label": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the vacationRequest",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/vacations/vacationRequests/delete/{id}.json": {
+            "delete": {
+                "tags": [
+                    "vacationRequests"
+                ],
+                "summary": "delete vacationRequest",
+                "description": "",
+                "operationId": "deleteVacationRequest",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "vacationRequest id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        },
+                        "label": "id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "headers": {
+                            "X-Rate-Limit": {
+                                "description": "calls per hour allowed by the vacationRequest",
+                                "schema": {
+                                    "type": "integer",
+                                    "format": "int32"
+                                }
+                            },
+                            "X-Expires-After": {
+                                "description": "date in UTC when token expires",
+                                "schema": {
+                                    "type": "string",
+                                    "format": "date-time"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Invalid athorization token"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "name": "Authorization",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

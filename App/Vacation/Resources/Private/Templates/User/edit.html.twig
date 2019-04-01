@@ -1,0 +1,78 @@
+{% extends 'Page/vacation.base.html.twig' %}
+
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    {#{{ dump() }}#}
+    {% for type, messages in flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm-8">
+                <h2 class="text-center">Edit User</h2>
+                <form action="{{ base }}/vacations/users/update/{{ user.id }}" method="post" target="_self">
+                    <div class="form-group">
+                        <label for="firstName">First name</label>
+                        <input name="entity[firstName]" type="text" value="{{ user.firstName }}" class="form-control" id="firstName" placeholder="First name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last name</label>
+                        <input name="entity[lastName]" type="text" value="{{ user.lastName }}" class="form-control" id="lastName" placeholder="Last name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="userName">Username</label>
+                        <span class="form-control" id="userName">{{ user.userName }}</span>
+                    </div>
+
+                    <div class="form-group">
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#changePassword" aria-expanded="false" aria-controls="changePassword">
+                           Change Password
+                        </button>
+                    </div>
+                    <div class="collapse" id="changePassword">
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input name="entity[password]" type="password" value="" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <label for="repeatPassword">Repeat password</label>
+                            <input name="entity[repeatPassword]" type="password" value="" class="form-control" id="repeatPassword" placeholder="Repeat password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input name="entity[email]" type="email" value="{{ user.email }}" class="form-control" id="email" placeholder="name@example.com" required>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input name="entity[admin]" type="checkbox" class="form-check-input" value="1" {% if user.admin %} checked="checked" {% endif %}>Is admin
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <label class="form-check-label">
+                                <input name="entity[userWhoCanApproveVacation]" type="checkbox" class="form-check-input" value="1" {% if user.userWhoCanApproveVacation %} checked="checked" {% endif %}>Is user who can approve vacations
+                            </label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="vacationDays">Vacation days</label>
+                        <input name="entity[vacationDays]" type="number" class="form-control" id="vacationDays" placeholder="Vacation days" min="0" value="{{ user.vacationDays }}">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+    </div>
+
+{% endblock %}

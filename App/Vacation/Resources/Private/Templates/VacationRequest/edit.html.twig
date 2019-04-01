@@ -1,0 +1,56 @@
+{% extends 'Page/vacation.base.html.twig' %}
+
+{% block title %}Edit VacationRequest{% endblock %}
+
+{% block body %}
+    {#{{ dump() }}#}
+    {% for type, messages in flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm-8">
+                <h2 class="text-center">Edit VacationRequest</h2>
+                <form action="{{ base }}/vacations/vacationRequests/update/{{ vacationRequest.id }}" method="post" target="_self">
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <div class='input-group date'>
+                            <input name="entity[startDate]" type="text" value="{{ vacationRequest.startDateString }}" class="form-control" id="startDate" placeholder="Start date" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <div class='input-group date'>
+                            <input name="entity[endDate]" type="text" value="{{ vacationRequest.endDateString }}" class="form-control" id="endDate" placeholder="End date" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="user">User</label>
+                        <select class="form-control" id="user" name ="entity[user]">
+                            {% for userOption in userOptions %}
+                                <option {% if userOption.id == user.id %}selected{% endif %} value="{{ userOption.id }}">{{ userOption.userName }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <select class="form-control" id="state" name ="entity[state]">
+                            <option value="0" {% if state == 0 %}selected{% endif %}>Pending</option>
+                            <option value="1" {% if state == 1 %}selected{% endif %}>Approved</option>
+                            <option value="2" {% if state == 2 %}selected{% endif %}>Denied</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-block">Save</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+    </div>
+
+{% endblock %}

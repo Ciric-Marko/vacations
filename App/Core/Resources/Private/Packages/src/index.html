@@ -1,0 +1,149 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+shrink-to-fit=no">
+    <link rel="stylesheet" href="./app.css"/>
+    <title>Core</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">Core</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDefault"
+            aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarDefault">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown01" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Dropdown</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<main role="main" class="container">
+
+    <div class="template">
+        <h1>Bootstrap starter template</h1>
+        <p class="lead">Use this document as a way to quickly start any new project.<br> All you get is this text and a
+            mostly barebones HTML document.</p>
+
+    </div>
+
+
+    <div>
+        <ul class="tree">
+            <li class=""><a data-entry-id="1" href="#">Prio 1 Aufgaben</a>
+                <ul>
+                    <li class=""><a data-entry-id="10" href="#">Customer</a>
+                        <ul>
+                            <li class="last "><a data-entry-id="11" href="#">204. Task</a>
+                                <ul>
+                                    <li class="last empty "><a data-entry-id="12" href="#">209. Task</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="last "><a data-entry-id="9" href="#">Supplier</a>
+                        <ul>
+                            <li class="empty "><a data-entry-id="4" href="#">Punkt ABC123</a></li>
+                            <li class=""><a data-entry-id="5" href="#">Punkt BCD123</a>
+                                <ul>
+                                    <li class="empty "><a data-entry-id="7" href="#">Task 22222</a></li>
+                                    <li class="empty "><a data-entry-id="8" href="#">Task 566</a></li>
+                                    <li class="last empty "><a data-entry-id="18" href="#">ZOMG Task</a></li>
+                                </ul>
+                            </li>
+                            <li class="last empty "><a data-entry-id="6" href="#">Punkt UARGH123</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class=""><a data-entry-id="2" href="#">Prio 2 Aufgaben</a>
+                <ul>
+                    <li class="last empty "><a data-entry-id="14" href="#">asdasd. Task</a></li>
+                </ul>
+            </li>
+            <li class=""><a data-entry-id="3" href="#">Prio 3 Aufgaben</a>
+                <ul>
+                    <li class="last "><a data-entry-id="13" href="#">123. Task</a>
+                        <ul>
+                            <li class="empty "><a data-entry-id="17" href="#">Gedöns Task</a></li>
+                            <li class="empty "><a data-entry-id="19" href="#">mimimi. Task</a></li>
+                            <li class="last empty "><a data-entry-id="15" href="#">nomnom. Task</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <ul class="tree ajax-tree">
+            <li class=""><a data-entry-id="1" href="#">Prio 1 Aufgaben</a></li>
+            <li class=""><a data-entry-id="2" href="#">Prio 2 Aufgaben</a></li>
+            <li class="last"><a data-entry-id="3" href="#">Prio 3 Aufgaben</a></li>
+        </ul>
+    </div>
+
+    <div>
+        <ul class="tree">
+            <li><a href="#">Animals</a>
+                <ul>
+                    <li class="empty"><a href="#">Birds</a></li>
+                    <li><a href="#">Mammals</a>
+                        <ul>
+                            <li class="empty"><a href="#">Elephant</a></li>
+                            <li class="last empty"><a href="#">Mouse</a></li>
+                        </ul>
+                    </li>
+                    <li class="last empty"><a href="#">Reptiles</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Animals</a>
+                <ul>
+                    <li class="empty"><a href="#">Birds</a></li>
+                    <li><a href="#">Mammals</a>
+                        <ul>
+                            <li class="empty"><a href="#">Elephant</a></li>
+                            <li class="last empty"><a href="#">Mouse</a></li>
+                        </ul>
+                    </li>
+                    <li class="last empty"><a href="#">Reptiles</a></li>
+                </ul>
+            </li>
+            <li class="last"><a href="#">Plants</a>
+                <ul>
+                    <li class="empty"><a href="#">Flowers</a>
+                        <ul>
+                            <li class="empty"><a href="#">Rose</a></li>
+                            <li class="last empty"><a href="#">Tulip</a></li>
+                        </ul>
+                    </li>
+                    <li class="last empty"><a href="#">Trees</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</main>
+<script src="./app.js"></script>
+</body>
+</html>

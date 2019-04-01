@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1,
+shrink-to-fit=no">
+    <title>{% block title %}Test Application{% endblock %}</title>
+    <base href="{{ base }}" target="_blank">
+    <link rel="stylesheet" href="{{ base }}/App/Core/Resources/Public/dist/app.css">
+    <link rel="stylesheet" href="{{ base }}/App/Core/Resources/Public/dist/font-awesome.css">
+</head>
+<body>
+{% block navbar %}
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="#">Core</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarDefault"
+                aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarDefault">
+            {%  if loggedInUser %}
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ base }}/vacations/users/show/{{loggedInUser.id}}" target="_self">My Details</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Users
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ base }}/vacations/users" target="_self">Users</a>
+                            {%  if loggedInUser.admin %}
+                                <a class="dropdown-item" href="{{ base }}/vacations/users/new" target="_self">New user</a>
+                            {% endif %}
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{ base }}/vacations/users/show/{{loggedInUser.id}}" target="_self">My Details</a>
+                        </div>
+                    </li>
+                    {%  if loggedInUser.admin %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Vacation Requests
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ base }}/vacations/vacationRequests" target="_self">Vacation requests</a>
+                                <a class="dropdown-item" href="{{ base }}/vacations/vacationRequests/new" target="_self">New vacation request</a>
+                            </div>
+                        </li>
+                    {% endif %}
+                </ul>
+                <a class="btn btn-secondary " href="{{ base }}/{{ config.logoutUrl }}" target="_self">Log out</a>
+            {% endif %}
+        </div>
+    </nav>
+{% endblock %}
+
+<main role="main" class="container">
+    {% block body %}{% endblock %}
+</main>
+<script src="{{ base }}/App/Core/Resources/Public/dist/app.js"></script>
+<script src="{{ base }}/App/Core/Resources/Public/dist/font-awesome.js"></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{% extends 'Page/vacation.base.html.twig' %}
+
+{% block title %}VacationRequest Details{% endblock %}
+
+{% block body %}
+    {#{{ dump() }}#}
+    {% for type, messages in flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm-8">
+                <h2 class="text-center">VacationRequest Details</h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Label</th>
+                        <th scope="col">#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="col">Id</th><th scope="row">{{vacationRequest.id}}</th>
+                        </tr>
+                        <tr>
+                            {#{{ vacationRequest.startDate|date('Y-m-d\TH:i:sP', 'UTC') }}#}
+                            {#{{ vacationRequest.startDate|date('Y-m-d\TH:i:sP', vacationRequest.timezone) }}#}
+                            <th scope="col">Start Date</th><td>{{vacationRequest.startDateString }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">End Date</th><td>{{vacationRequest.endDateString }}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">User</th><td>{{vacationRequest.user.userName}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">State</th><td>{{vacationRequest.stateString}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+    </div>
+
+{% endblock %}

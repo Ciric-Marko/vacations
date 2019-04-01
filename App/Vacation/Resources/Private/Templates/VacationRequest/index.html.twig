@@ -1,0 +1,46 @@
+{% extends 'Page/vacation.base.html.twig' %}
+
+{% block title %}My cool blog posts{% endblock %}
+
+{% block body %}
+    {% for type, messages in flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+    <h2 class="text-center">VacationRequest list</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            <th scope="col">User</th>
+            <th scope="col">State</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for vacationRequest in vacationRequests %}
+            <tr>
+                <th scope="row">{{ vacationRequest.id }}</th>
+                <td>{{ vacationRequest.startDateString }}</td>
+                <td>{{ vacationRequest.endDateString }}</td>
+                <td>{{ vacationRequest.user.userName }}</td>
+                <td>{{ vacationRequest.stateString }}</td>
+                <td>
+                    <form action="{{ base }}/vacations/vacationRequests/delete/{{ vacationRequest.id }}" method="post"
+                          target="_self">
+                        <div class="btn-group" role="group" aria-label="actions">
+                            <a href="{{ base }}/vacations/vacationRequests/show/{{ vacationRequest.id }}" class="btn btn-success">Show</a>
+                            <a href="{{ base }}/vacations/vacationRequests/edit/{{ vacationRequest.id }}" class="btn btn-primary">Edit</a>
+                            <button type="submit" class="btn btn-danger btn-block ">Delete</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

@@ -1,0 +1,60 @@
+loginUrl: vacations/authentication/login
+logoutUrl: vacations/authentication/logout
+jwtSecret: some_jwt_secret_change_me
+plugins:
+  vacations:
+    controllers:
+      authentication:
+        controllerClass: App\Vacation\Controller\AuthenticationController
+        viewClass: App\Vacation\View\View
+        actions:
+          login:
+            layoutPath: Page/index.html.twig
+            templatePath: Authentication/login.html.twig
+          auth:
+      users:
+        controllerClass: App\Vacation\Controller\UserController
+        viewClass: App\Vacation\View\View
+        actions:
+          index:
+            layoutPath: Page/index.html.twig
+            templatePath: User/index.html.twig
+          show:
+            layoutPath: Page/index.html.twig
+            templatePath: User/show.html.twig
+          new:
+            layoutPath: Page/index.html.twig
+            templatePath: User/new.html.twig
+          create:
+          edit:
+            layoutPath: Page/index.html.twig
+            templatePath: User/edit.html.twig
+          update:
+          delete:
+          newVacationRequestForUser:
+            layoutPath: Page/index.html.twig
+            templatePath: User/newVacationRequest.html.twig
+          createVacationRequest:
+          manageVacationRequest:
+            layoutPath: Page/index.html.twig
+            templatePath: User/manageVacationRequest.html.twig
+          processVacationRequest:
+      vacationRequests:
+        controllerClass: App\Vacation\Controller\VacationRequestController
+        viewClass: App\Vacation\View\View
+        actions:
+          index:
+            layoutPath: Page/index.html.twig
+            templatePath: VacationRequest/index.html.twig
+          show:
+            layoutPath: Page/index.html.twig
+            templatePath: VacationRequest/show.html.twig
+          new:
+            layoutPath: Page/index.html.twig
+            templatePath: VacationRequest/new.html.twig
+          create:
+          edit:
+            layoutPath: Page/index.html.twig
+            templatePath: VacationRequest/edit.html.twig
+          update:
+          delete:

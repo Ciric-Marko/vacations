@@ -1,0 +1,94 @@
+{% extends 'Page/vacation.base.html.twig' %}
+
+{% block title %}User Details{% endblock %}
+
+{% block body %}
+    {#{{ dump() }}#}
+    {% for type, messages in flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm"></div>
+            <div class="col-sm-8">
+                <h2 class="text-center">User Details</h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th scope="col">Label</th>
+                        <th scope="col">#</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="col">Id</th><th scope="row">{{user.id}}</th>
+                        </tr>
+                        <tr>
+                            <th scope="col">Username</th><td>{{user.userName}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">First name</th><td>{{user.firstName}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Last name</th><td>{{user.lastName}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">email</th><td>{{user.email}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Is Admin</th><td>{{user.isAdmin}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Can approve vacation</th><td>{{user.isUserWhoCanApproveVacation}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Vacation days</th><td>{{user.vacationDays}}</td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Vacations</th>
+                            <td>
+                                {% if user.vacationRequests %}
+                                    <ul class="list-group">
+                                        {% for vacationRequest in user.vacationRequests %}
+                                            {#{{ dump(vacationRequest.getStartDate()) }}#}
+                                            <li class="list-group-item">
+
+                                                <small> {{ vacationRequest.id }} -
+                                                    {{ vacationRequest.startDateString }} -
+                                                    {{ vacationRequest.endDateString }}
+
+                                                    {% set badgeClass %}
+                                                        {% if vacationRequest.state == 0 %}badge-primary{% endif %}
+                                                        {% if vacationRequest.state == 1 %}badge-success{% endif %}
+                                                        {% if vacationRequest.state == 2 %}badge-danger{% endif %}
+                                                    {% endset %}
+                                                    <span class="badge {{ badgeClass }}">{{ vacationRequest.stateString }}</span>
+                                                </small>
+                                                {% if loggedInUser.userWhoCanApproveVacation and vacationRequest.state == 0 %}
+                                                    <a href="{{ base }}/vacations/users/manageVacationRequest/{{vacationRequest.id}}" class="btn btn-warning">Process vacation request</a>
+                                                {% endif %}
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="col">Vacations</th>
+                            <td>
+                                <div class="form-group">
+                                    <a class="btn btn-primary" href="{{ base }}{{ base }}/vacations/users/newVacationRequestForUser/{{ user.id }}"  target="_self">Request new Vacation</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-sm"></div>
+        </div>
+    </div>
+
+{% endblock %}

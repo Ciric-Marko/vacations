@@ -1,0 +1,63 @@
+{% extends 'Page/vacation.base.html.twig' %}
+
+{% block title %}User list{% endblock %}
+
+{% block body %}
+    {% for type, messages in flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
+    <h2 class="text-center">User list</h2>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Username</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">email</th>
+            <th scope="col">Is Admin</th>
+            <th scope="col">Can approve vacation</th>
+            <th scope="col">Vacation days</th>
+            <th scope="col">Vacations</th>
+            <th scope="col">Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% for user in users %}
+            <tr>
+                <th scope="row">{{user.id}}</th>
+                <td>{{user.username}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.isAdmin}}</td>
+                <td>{{user.isUserWhoCanApproveVacation}}</td>
+                <td>{{user.vacationDays}}</td>
+                <td>
+                    {% if user.pendingVacationRequest | length > 0 %}
+                        <span class="badge badge-pill badge-primary"> Pending {{ user.pendingVacationRequest | length }}</span>
+                    {%  endif %}
+                    {% if user.approvedVacationRequest | length > 0 %}
+                        <span class="badge badge-pill badge-success"> Approved {{ user.approvedVacationRequest | length }}</span>
+                    {%  endif %}
+                    {% if user.deniedVacationRequest | length > 0 %}
+                        <span class="badge badge-pill badge-danger"> Denied {{ user.deniedVacationRequest | length }}</span>
+                    {%  endif %}
+                </td>
+                <td>
+                    <form action="{{ base }}/vacations/users/delete/{{user.id}}" method="post" target="_self">
+                        <div class="btn-group" role="group" aria-label="actions">
+                            <a href="{{ base }}/vacations/users/show/{{user.id}}" class="btn btn-success"  target="_self">Show</a>
+                            <a href="{{ base }}/vacations/users/edit/{{user.id}}" class="btn btn-primary"  target="_self">Edit</a>
+                            <button type="submit" class="btn btn-danger btn-block">Delete</button>
+                        </div>
+                    </form>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

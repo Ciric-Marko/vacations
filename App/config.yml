@@ -1,0 +1,22 @@
+---
+default:
+  plugin: vacations
+  controller: authentication
+  action: login
+  arguments: []
+  language: sr
+  fallbackLanguage: eng
+error404:
+  plugin: core
+  controller: page
+  action: show404
+  arguments: []
+error50x:
+  plugin: core
+  controller: page
+  action: show50x
+  arguments: []
+
+imports:
+    core: Core/Classes/Configuration/config.yml
+    vacation: Vacation/Classes/Configuration/config.yml

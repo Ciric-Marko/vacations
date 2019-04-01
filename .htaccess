@@ -1,0 +1,17 @@
+Options +FollowSymlinks
+
+#AuthType Basic
+#AuthName "auth"
+#AuthUserFile C:\wamp\www\.htpasswd
+#require valid-user
+SetEnvIf Authorization .+ HTTP_AUTHORIZATION=$0
+RewriteEngine on
+
+RewriteCond %{REQUEST_URI} !^/vacations2/App/Vacation/Resources/Public/.*$
+RewriteCond %{REQUEST_URI} !^/vacations2/App/Core/Resources/Public/.*$
+
+RewriteCond %{REQUEST_URI} !^/App/Vacation/Resources/Public/.*$
+RewriteCond %{REQUEST_URI} !^/App/Core/Resources/Public/dist/.*$
+RewriteRule .* index.php [L]
+
+Options -Indexes

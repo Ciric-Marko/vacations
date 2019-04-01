@@ -1,0 +1,34 @@
+---
+#default:
+#  plugin: core
+#  controller: page
+#  action: index
+#  arguments: []
+#  language: ger
+#  fallbackLanguage: eng
+#404:
+#  plugin: core
+#  controller: page
+#  action: show404
+#  arguments: []
+#50x:
+#  plugin: core
+#  controller: page
+#  action: show50x
+#  arguments: []
+plugins:
+  core:
+    controllers:
+      page:
+        controllerClass: App\Core\Controller\PageController
+        viewClass: App\Core\View\View
+        actions:
+          index:
+            layoutPath: Page/index.html.twig
+            templatePath: Page/index.html.twig
+          show404:
+            layoutPath: Page/404.html.twig
+            templatePath: Page/404.html.twig
+          show50x:
+            layoutPath: Page/50x.html.twig
+            templatePath: Page/50x.html.twig
