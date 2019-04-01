@@ -11,7 +11,7 @@ namespace App\Vacation\Authentication;
 class AuthenticationService {
 
     /** @var AuthenticationService */
-    protected static $instance = null;
+    protected static $instance = NULL;
 
     /**
      * Make constructor private, so nobody can call "new Class".
@@ -52,20 +52,20 @@ class AuthenticationService {
      *
      * @var AdapterInterface
      */
-    protected $adapter = null;
+    protected $adapter = NULL;
 
 
     /**
-     * @var Result null
+     * @var Result NULL
      */
-    protected $authenticationResult = null;
+    protected $authenticationResult = NULL;
 
     /**
      * Returns the authentication adapter
      *
      * The adapter does not have a default if the storage adapter has not been set.
      *
-     * @return AdapterInterface|null
+     * @return AdapterInterface|NULL
      */
     public function getAdapter() {
         return $this->adapter;
@@ -103,7 +103,7 @@ class AuthenticationService {
      * @return AuthenticationService
      * @throws \Exception
      */
-    public function authenticate(AdapterInterface $adapter = null) {
+    public function authenticate(AdapterInterface $adapter = NULL) {
         if (!$adapter) {
             $adapter = $this->getAdapter();
             if ($adapter) {
@@ -117,14 +117,14 @@ class AuthenticationService {
      * @return bool
      */
     public function hasIdentity() {
-        return $this->getIdentity() !== null;
+        return $this->getIdentity() !== NULL;
     }
 
     /**
      * @return mixed
      */
     public function getIdentity() {
-        return $this->getAuthenticationResult()->getIdentity() !== null ?
+        return $this->getAuthenticationResult()->getIdentity() !== NULL ?
             $this->getAuthenticationResult()->getIdentity() : $this->getAdapter()->getIdentity();
     }
 

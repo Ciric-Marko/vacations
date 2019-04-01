@@ -15,11 +15,11 @@ namespace App\Core\Bootstrap;
  */
 class Bootstrap {
 
-    /** @var \Klein\Klein | null */
-    private $klein = null;
+    /** @var \Klein\Klein | NULL */
+    private $klein = NULL;
 
     /** @var \App\Core\Configuration\Configuration */
-    private $configuration = null;
+    private $configuration = NULL;
 
     /**
      * Bootstrap constructor.
@@ -55,7 +55,7 @@ class Bootstrap {
     }
 
     /**
-     * @return \Klein\Klein|null
+     * @return \Klein\Klein|NULL
      */
     protected function getKlein() {
         return $this->klein;
@@ -119,7 +119,7 @@ class Bootstrap {
                             if (count($parameters) === 1 && isset($arguments[0])) {
                                 $actionArguments[$arg->name] = $arguments[0];
                             } else {
-                                $actionArguments[$arg->name] = null;
+                                $actionArguments[$arg->name] = NULL;
                             }
                         }
                     }

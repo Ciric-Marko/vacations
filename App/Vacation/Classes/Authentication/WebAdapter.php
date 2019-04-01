@@ -1,17 +1,18 @@
 <?php
+
 namespace App\Vacation\Authentication;
 
-class WebAdapter implements \App\Vacation\Authentication\AdapterInterface
-{
-    /**
-     * @var string
-     */
-    private $userName  =  '';
+class WebAdapter implements \App\Vacation\Authentication\AdapterInterface {
 
     /**
      * @var string
      */
-    private $password  =  '';
+    private $userName = '';
+
+    /**
+     * @var string
+     */
+    private $password = '';
 
     /**
      * Sets username and password for authentication
@@ -51,10 +52,10 @@ class WebAdapter implements \App\Vacation\Authentication\AdapterInterface
                 if ($user->validatePassword($this->password)) {
                     $result = new Result(Result::SUCCESS, $user);
                 } else {
-                    $result = new Result(Result::FAILURE_CREDENTIAL_INVALID, null, ['Invalid Password']);
+                    $result = new Result(Result::FAILURE_CREDENTIAL_INVALID, NULL, ['Invalid Password']);
                 }
             } else {
-                $result = new Result(Result::FAILURE_IDENTITY_NOT_FOUND, null, ['Invalid username']);
+                $result = new Result(Result::FAILURE_IDENTITY_NOT_FOUND, NULL, ['Invalid username']);
             }
 
             if ($this->hasIdentity()) {
@@ -69,7 +70,7 @@ class WebAdapter implements \App\Vacation\Authentication\AdapterInterface
     }
 
     /**
-     * Returns true if and only if an identity is available from storage
+     * Returns TRUE if and only if an identity is available from storage
      *
      * @return bool
      */
@@ -78,9 +79,9 @@ class WebAdapter implements \App\Vacation\Authentication\AdapterInterface
     }
 
     /**
-     * Returns the identity from storage or null if no identity is available
+     * Returns the identity from storage or NULL if no identity is available
      *
-     * @return mixed|null
+     * @return mixed|NULL
      */
     public function getIdentity() {
         return isset($_SESSION['identity']) ? $_SESSION['identity'] : NULL;

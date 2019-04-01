@@ -72,7 +72,7 @@ class View {
                 $loader->addPath('App/Core/Resources/Private/Templates/');
                 $twig = new \Twig\Environment($loader, [
 //                    'cache' => '/path/to/compilation_cache',
-                    'debug' => true,
+                    'debug' => TRUE,
                 ]);
                 $twig->addExtension(new \Twig\Extension\DebugExtension());
                 $name = $this->getTemplatePath();

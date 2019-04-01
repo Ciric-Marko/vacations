@@ -253,27 +253,29 @@ class User implements \JsonSerializable {
      */
     public function getPendingVacationRequest() {
         return $this->getVacationRequests() ? $this->getVacationRequests()->filter(
-            function(VacationRequest $vacationRequest) {
+            function (VacationRequest $vacationRequest) {
                 return $vacationRequest->getState() === VacationRequest::STATE_PENDING;
             }
         ) : array();
     }
+
     /**
      * @return mixed
      */
     public function getApprovedVacationRequest() {
         return $this->getVacationRequests() ? $this->getVacationRequests()->filter(
-            function(VacationRequest $vacationRequest) {
+            function (VacationRequest $vacationRequest) {
                 return $vacationRequest->getState() === VacationRequest::STATE_APPROVED;
             }
         ) : array();
     }
+
     /**
      * @return mixed
      */
     public function getDeniedVacationRequest() {
         return $this->getVacationRequests() ? $this->getVacationRequests()->filter(
-            function(VacationRequest $vacationRequest) {
+            function (VacationRequest $vacationRequest) {
                 return $vacationRequest->getState() === VacationRequest::STATE_DENIED;
             }
         ) : array();
@@ -285,9 +287,10 @@ class User implements \JsonSerializable {
      * @throws \Exception
      */
     public function processVacationRequest(VacationRequest $vacationRequest) {
-        $numberOfWorkingDays = $this->numberOfWorkingDays($vacationRequest->getStartDate(), $vacationRequest->getEndDate());
+        $numberOfWorkingDays = $this->numberOfWorkingDays($vacationRequest->getStartDate(),
+            $vacationRequest->getEndDate());
         if ($vacationRequest->getState() == VacationRequest::STATE_APPROVED) {
-            if ( $this->getVacationDays() - $numberOfWorkingDays >= 0) {
+            if ($this->getVacationDays() - $numberOfWorkingDays >= 0) {
                 $this->setVacationDays($this->getVacationDays() - $numberOfWorkingDays);
                 return true;
             } else {
@@ -303,21 +306,25 @@ class User implements \JsonSerializable {
      * @param $to
      * @return int
      */
-    function numberOfWorkingDays($from, $to) {
+    private function numberOfWorkingDays($from, $to) {
         $workingDays = [1, 2, 3, 4, 5]; # date format = N (1 = Monday, ...)
         $holidayDays = ['*-12-25', '*-01-01', '2013-12-23']; # variable and fixed holidays
 
-//        $from = new \DateTime($from);
-//        $to = new \DateTime($to);
         $to->modify('+1 day');
         $interval = new \DateInterval('P1D');
         $periods = new \DatePeriod($from, $interval, $to);
 
         $days = 0;
         foreach ($periods as $period) {
-            if (!in_array($period->format('N'), $workingDays)) continue;
-            if (in_array($period->format('Y-m-d'), $holidayDays)) continue;
-            if (in_array($period->format('*-m-d'), $holidayDays)) continue;
+            if (!in_array($period->format('N'), $workingDays)) {
+                continue;
+            }
+            if (in_array($period->format('Y-m-d'), $holidayDays)) {
+                continue;
+            }
+            if (in_array($period->format('*-m-d'), $holidayDays)) {
+                continue;
+            }
             $days++;
         }
         return $days;

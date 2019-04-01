@@ -10,14 +10,6 @@ namespace App\Vacation\Domain\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class VacationRequestRepository extends EntityRepository
-{
-    public function findAllOrderedByName()
-    {
-        return $this->getEntityManager()
-            ->createQuery(
-                'SELECT p FROM AppBundle:Product p ORDER BY p.name ASC'
-            )
-            ->getResult();
-    }
+class VacationRequestRepository extends EntityRepository {
+
 }

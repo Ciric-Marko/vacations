@@ -18,16 +18,16 @@ use Symfony\Component\Yaml\Yaml;
 final class Configuration {
 
     /**
-     * @var string | null
+     * @var string | NULL
      */
-    protected $rootPath = null;
+    protected $rootPath = NULL;
     /**
-     * @var array | null
+     * @var array | NULL
      */
-    protected $config = null;
+    protected $config = NULL;
 
     /** @var \App\Core\Configuration\Configuration  */
-    protected static $instance = null;
+    protected static $instance = NULL;
 
     /**
      * Make constructor private, so nobody can call "new Class".
@@ -68,9 +68,9 @@ final class Configuration {
      * @param $default
      * @return array|mixed
      */
-    public function getConfig($path = '', $default = null) {
+    public function getConfig($path = '', $default = NULL) {
 
-        if ($this->config === null) {
+        if ($this->config === NULL) {
             $this->config = Yaml::parse(file_get_contents(__DIR__ . '/../../../config.yml'));
             if (isset($this->config['imports'])) {
                 $imports = $this->config['imports'];
@@ -82,7 +82,6 @@ final class Configuration {
                 }
             }
         }
-        //var_dump($this->config);
         if (!empty($path)) {
             $ret = $this->getArrayPath($path, $this->config);
             return $ret ? $ret : $default;
@@ -97,8 +96,6 @@ final class Configuration {
      * @return mixed
      */
     protected function getArrayPath($path, array $deepArray) {
-
-       // var_dump($path, $deepArray);
         $reduce = function (array $xs, $x) {
             return (
             array_key_exists($x, $xs)
@@ -116,90 +113,90 @@ final class Configuration {
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function getDefaultPlugin() {
         return $this->getConfig('default/plugin');
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function getDefaultController() {
         return $this->getConfig('default/controller');
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function getDefaultAction() {
         return $this->getConfig('default/action');
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function getDefaultArguments() {
         return $this->getConfig('default/arguments');
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function getLoginUrl() {
         return $this->getConfig('loginUrl');
     }
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function get404Plugin() {
         return $this->getConfig('error404/plugin');
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function get404Controller() {
         return $this->getConfig('error404/controller');
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function get404Action() {
         return $this->getConfig('error404/action');
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function get404Arguments() {
         return $this->getConfig('error404/arguments');
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function get50xPlugin() {
         return $this->getConfig('error50x/plugin');
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function get50xController() {
         return $this->getConfig('error50x/controller');
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function get50xAction() {
         return $this->getConfig('error50x/action');
     }
 
     /**
-     * @return string|null
+     * @return string|NULL
      */
     public function get50xArguments() {
         return $this->getConfig('error50x/arguments');
@@ -211,7 +208,7 @@ final class Configuration {
      * @return bool
      */
     public function hasController($controllerName, $pluginName = 'backend') {
-        return $this->getConfig('plugins/' . $pluginName . '/controllers/' . $controllerName) !== null;
+        return $this->getConfig('plugins/' . $pluginName . '/controllers/' . $controllerName) !== NULL;
     }
 
     /**
@@ -221,7 +218,7 @@ final class Configuration {
      * @return bool
      */
     public function hasControllerAction($actionName, $controllerName, $pluginName = 'backend') {
-        return $this->getConfig('plugins/' . $pluginName . '/controllers/' . $controllerName . '/actions/' . $actionName) !== null;
+        return $this->getConfig('plugins/' . $pluginName . '/controllers/' . $controllerName . '/actions/' . $actionName) !== NULL;
     }
 
     /**
@@ -304,7 +301,7 @@ final class Configuration {
      * @return string
      */
     public function getRootPath() {
-        if ($this->rootPath === null) {
+        if ($this->rootPath === NULL) {
             $this->rootPath = __DIR__ . '/../../';
         }
         return $this->rootPath;

@@ -8,17 +8,17 @@ namespace App\Core\Controller;
  */
 abstract class AbstractController {
 
-    /** @var \App\Core\View\View | null */
-    protected $view = null;
+    /** @var \App\Core\View\View | NULL */
+    protected $view = NULL;
 
     /** @var \App\Core\Configuration\Configuration */
-    protected $configuration = null;
+    protected $configuration = NULL;
 
     /** @var \Doctrine\ORM\EntityManager */
-    protected $em = null;
+    protected $em = NULL;
 
-    /** @var \Klein\Klein | null */
-    private $klein = null;
+    /** @var \Klein\Klein | NULL */
+    private $klein = NULL;
     /**
      * myTreeView constructor.
      * @param \App\Core\View\View $view
@@ -40,28 +40,28 @@ abstract class AbstractController {
     }
 
     /**
-     * @return \Klein\Klein|null
+     * @return \Klein\Klein|NULL
      */
     public function getKlein() {
         return $this->klein;
     }
 
     /**
-     * @param \Klein\Klein|null $klein
+     * @param \Klein\Klein|NULL $klein
      */
     public function setKlein($klein) {
         $this->klein = $klein;
     }
 
     /**
-     * @return \App\Core\View\View|null
+     * @return \App\Core\View\View|NULL
      */
     public function getView() {
         return $this->view;
     }
 
     /**
-     * @param \App\Core\View\View|null $view
+     * @param \App\Core\View\View|NULL $view
      */
     public function setView($view) {
         $this->view = $view;
@@ -130,7 +130,7 @@ abstract class AbstractController {
     /**
      * @param $actionName
      * @param array $actionArguments
-     * @param null $method
+     * @param NULL $method
      */
     public function redirectToAction($actionName, $actionArguments = array(), $method = NULL) {
         if ($method !== NULL && is_string($method)) {

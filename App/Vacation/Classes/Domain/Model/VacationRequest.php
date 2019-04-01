@@ -62,6 +62,7 @@ class VacationRequest implements \JsonSerializable {
     public function __construct() {
 
     }
+
     /**
      * @return int
      */
@@ -216,7 +217,7 @@ class VacationRequest implements \JsonSerializable {
             'endDateTimezone' => $this->getEndDateTimezone(),
             'startDate' => $this->getStartDateString(),
             'endDate' => $this->getStartDateString(),
-            'user' => $this->getUser()? $this->getUser()->getId() : NULL,
+            'user' => $this->getUser() ? $this->getUser()->getId() : null,
             'state' => $this->getState(),
         ];
     }

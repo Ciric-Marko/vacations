@@ -4,7 +4,11 @@
 
 {% block body %}
     {#{{ dump() }}#}
-
+    {% for type, messages in flashes %}
+        {% for message in messages %}
+            <div class="alert alert-{{ type }}">{{ message }}</div>
+        {% endfor %}
+    {% endfor %}
     <div class="login-form">
         <form action="{{ base }}/vacations/authentication/auth" method="post" target="_self">
             <h2 class="text-center">Log in</h2>

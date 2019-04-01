@@ -21,14 +21,14 @@ use App\Core\Helpers\DoctrineExtensions\DBAL\Types\UTCDateTimeType;
  */
 final class Doctrine {
 
-    /** @var \App\Core\Service\Doctrine|null */
-    protected static $instance = null;
+    /** @var \App\Core\Service\Doctrine|NULL */
+    protected static $instance = NULL;
 
-    /** @var \Doctrine\DBAL\Connection|null */
-    protected $connection = null;
+    /** @var \Doctrine\DBAL\Connection|NULL */
+    protected $connection = NULL;
 
-    /** @var \Doctrine\ORM\EntityManager|null */
-    protected $entityManager = null;
+    /** @var \Doctrine\ORM\EntityManager|NULL */
+    protected $entityManager = NULL;
 
     /**
      * Make constructor private, so nobody can call "new Class".
@@ -62,7 +62,7 @@ final class Doctrine {
     }
 
     /**
-     * @return \Doctrine\DBAL\Connection|null
+     * @return \Doctrine\DBAL\Connection|NULL
      */
     public function getConnection() {
         if (!$this->connection) {
@@ -91,7 +91,7 @@ final class Doctrine {
     }
 
     /**
-     * @return \Doctrine\ORM\EntityManager|null
+     * @return \Doctrine\ORM\EntityManager|NULL
      */
     public function getEntityManager() {
         if (!$this->entityManager) {
@@ -112,7 +112,7 @@ final class Doctrine {
                     'charset' => $parameters['charset'],
                     'driver' => $parameters['driver'],
                 );
-                $isDevMode = true;
+                $isDevMode = TRUE;
                 $annotationMetadataConfiguration = Setup::createAnnotationMetadataConfiguration(
                     array(
                         __DIR__."/../Domain/Model/",

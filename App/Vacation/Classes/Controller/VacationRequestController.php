@@ -9,7 +9,7 @@ use \App\Core\Controller\AbstractController;
  */
 class VacationRequestController extends AbstractController {
 
-    /** @var null | \App\Vacation\Domain\Model\User */
+    /** @var NULL | \App\Vacation\Domain\Model\User */
     private $loggedInUser = NULL;
 
     /**
@@ -43,7 +43,7 @@ class VacationRequestController extends AbstractController {
                 $this->redirect($configuration->getLoginUrl());
             }
             if ($format == '.json') {
-                $this->getView()->assign('success', false);
+                $this->getView()->assign('success', FALSE);
                 $this->getView()->assign('message', 'invalid token');
                 $this->getView()->setRenderType(\App\Core\View\View::RENDER_TYPE_JSON);
                 $this->getView()->render();
@@ -69,7 +69,7 @@ class VacationRequestController extends AbstractController {
      * @return void
      */
     public function indexAction($format) {
-        $success = false;
+        $success = FALSE;
         $message = '';
         try {
             if (!$this->getLoggedInUser()->isAdmin()) {
@@ -79,9 +79,9 @@ class VacationRequestController extends AbstractController {
             $repository = $this->getEm()->getRepository(\App\Vacation\Domain\Model\VacationRequest::class);
             $vacationRequests = $repository->findAll();
             $this->getView()->assign('vacationRequests', $vacationRequests);
-            $success = true;
+            $success = TRUE;
         } catch (\Exception $e) {
-            $success = false;
+            $success = FALSE;
             $message = $e->getMessage();
             $this->getKlein()->response()->code($e->getCode());
         }
@@ -106,7 +106,7 @@ class VacationRequestController extends AbstractController {
      * @param $format
      */
     public function showAction($id, $format) {
-        $success = false;
+        $success = FALSE;
         $message = '';
         try {
             if ($id) {
@@ -114,18 +114,17 @@ class VacationRequestController extends AbstractController {
                     throw new \Exception('Not authorized', 403);
                 }
                 $repository = $this->getEm()->getRepository(\App\Vacation\Domain\Model\VacationRequest::class);
-                //The ORM internally escapes all your values, because it has lots of metadata available about the current context.
                 $vacationRequest = $repository->findOneBy(array('id' => intval($id)));
                 if (!$vacationRequest) {
                     throw new \Exception('vacationRequest not found');
                 }
                 $this->getView()->assign('vacationRequest', $vacationRequest);
-                $success = true;
+                $success = TRUE;
             } else {
                 throw new \Exception('vacationRequest id required');
             }
         } catch (\Exception $e) {
-            $success = false;
+            $success = FALSE;
             $message = $e->getMessage();
             $this->getKlein()->response()->code($e->getCode());
         }
@@ -173,7 +172,7 @@ class VacationRequestController extends AbstractController {
      * @param $format
      */
     public function createAction($entity, $format) {
-        $success = false;
+        $success = FALSE;
         $message = '';
         try {
             if (!$this->getLoggedInUser()->isAdmin()) {
@@ -187,7 +186,6 @@ class VacationRequestController extends AbstractController {
                 $userId = isset($entity['user']) ? intval($entity['user']) : 0;
                 /** @var \App\Vacation\Domain\Model\User $user */
                 $user = $repository->findOneBy(array('id' => $userId));
-//                $user->getVacationRequests()->toArray();
                 $vacationRequest = new \App\Vacation\Domain\Model\VacationRequest();
                 $vacationRequest->fromArray($entity);
 
@@ -200,7 +198,7 @@ class VacationRequestController extends AbstractController {
                 }
                 $this->getEm()->flush();
 //
-                $success = true;
+                $success = TRUE;
                 $message = 'VacationRequest created successfully';
 
                 $this->getView()->assign('vacationRequest', $vacationRequest);
@@ -209,7 +207,7 @@ class VacationRequestController extends AbstractController {
                 throw new \Exception('Wrong Method : ' . $method, 405);
             }
         } catch (\Exception $e) {
-            $success = false;
+            $success = FALSE;
             $message = $e->getMessage();
             $this->getKlein()->response()->code($e->getCode());
         }
@@ -243,7 +241,6 @@ class VacationRequestController extends AbstractController {
             }
             if ($id) {
                 $repository = $this->getEm()->getRepository(\App\Vacation\Domain\Model\VacationRequest::class);
-                //The ORM internally escapes all your values, because it has lots of metadata available about the current context.
                 $vacationRequest = $repository->findOneBy(array('id' => intval($id)));
                 if (!$vacationRequest) {
                     throw new \Exception('vacationRequest not found');
@@ -269,7 +266,7 @@ class VacationRequestController extends AbstractController {
      * @param $format
      */
     public function updateAction($id, $entity, $format) {
-        $success = false;
+        $success = FALSE;
         $message = '';
         try {
             if (!$this->getLoggedInUser()->isAdmin()) {
@@ -298,7 +295,7 @@ class VacationRequestController extends AbstractController {
                         $this->getEm()->persist($user);
                     }
                     $this->getEm()->flush();
-                    $success = true;
+                    $success = TRUE;
                     $message = 'VacationRequest updated successfully';
                     $this->getView()->assign('vacationRequest', $vacationRequest);
                 }
@@ -306,7 +303,7 @@ class VacationRequestController extends AbstractController {
                 throw new \Exception('Wrong Method : ' . $method, 405);
             }
         } catch (\Exception $e) {
-            $success = false;
+            $success = FALSE;
             $message = $e->getMessage();
             $this->getKlein()->response()->code($e->getCode());
         }
@@ -332,7 +329,7 @@ class VacationRequestController extends AbstractController {
      * @param $format
      */
     public function deleteAction($id, $format) {
-        $success = false;
+        $success = FALSE;
         $message = '';
         try {
             if (!$this->getLoggedInUser()->isAdmin()) {
@@ -347,7 +344,7 @@ class VacationRequestController extends AbstractController {
                     if ($vacationRequest) {
                         $this->getEm()->remove($vacationRequest);
                         $this->getEm()->flush();
-                        $success = true;
+                        $success = TRUE;
                         $message = 'VacationRequest deleted successfully';
                     } else {
                         throw new \Exception('vacationRequest not found', 400);
@@ -359,7 +356,7 @@ class VacationRequestController extends AbstractController {
                 throw new \Exception('Wrong Method : ' . $method, 405);
             }
         } catch (\Exception $e) {
-            $success = false;
+            $success = FALSE;
             $message = $e->getMessage();
             $this->getKlein()->response()->code($e->getCode());
         }

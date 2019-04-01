@@ -96,10 +96,10 @@ class JwtAdapter implements \App\Vacation\Authentication\AdapterInterface
                     $token = $jwtTokenUtility->createToken($user->getId());
                     $this->setToken($token);
                 } else {
-                    $result = new Result(Result::FAILURE_CREDENTIAL_INVALID, null, ['Invalid Password']);
+                    $result = new Result(Result::FAILURE_CREDENTIAL_INVALID, NULL, ['Invalid Password']);
                 }
             } else {
-                $result = new Result(Result::FAILURE_IDENTITY_NOT_FOUND, null, ['Invalid username']);
+                $result = new Result(Result::FAILURE_IDENTITY_NOT_FOUND, NULL, ['Invalid username']);
             }
         } else {
             $token = str_replace('Bearer ', '',
@@ -112,16 +112,15 @@ class JwtAdapter implements \App\Vacation\Authentication\AdapterInterface
                 // ...
                 /** @var \App\Vacation\Domain\Repository\UserRepository $repository */
                 $repository = $em->getRepository(\App\Vacation\Domain\Model\User::class);
-                //The ORM internally escapes all your values, because it has lots of metadata available about the current context.
                 /** @var \App\Vacation\Domain\Model\User $user */
                 $user = $repository->findOneBy(array('id' => $tokenData->uid));
                 if ($user) {
                     $result = new Result(Result::SUCCESS, $user);
                 } else {
-                    $result = new Result(Result::FAILURE_IDENTITY_NOT_FOUND, null, ['Invalid token']);
+                    $result = new Result(Result::FAILURE_IDENTITY_NOT_FOUND, NULL, ['Invalid token']);
                 }
             } else {
-                $result = new Result(Result::FAILURE_CREDENTIAL_INVALID, null, ['Invalid token']);
+                $result = new Result(Result::FAILURE_CREDENTIAL_INVALID, NULL, ['Invalid token']);
             }
         }
 
@@ -129,18 +128,18 @@ class JwtAdapter implements \App\Vacation\Authentication\AdapterInterface
     }
 
     /**
-     * Returns true if and only if an identity is available from storage
+     * Returns TRUE if and only if an identity is available from storage
      *
      * @return bool
      */
     public function hasIdentity() {
-        return $this->authenticate()->getIdentity() !== null;
+        return $this->authenticate()->getIdentity() !== NULL;
     }
 
     /**
-     * Returns the identity from storage or null if no identity is available
+     * Returns the identity from storage or NULL if no identity is available
      *
-     * @return mixed|null
+     * @return mixed|NULL
      */
     public function getIdentity() {
         return $this->authenticate()->getIdentity();

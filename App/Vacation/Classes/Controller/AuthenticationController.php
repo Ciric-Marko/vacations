@@ -36,9 +36,9 @@ class AuthenticationController extends AbstractController {
      * @param string $format
      */
     public function authAction($userName, $password, $format) {
-        $success = false;
+        $success = FALSE;
         $message = '';
-        $user = null;
+        $user = NULL;
         try {
             $method = $this->getKlein()->request()->method();
             if ($method === 'POST') {
@@ -54,7 +54,7 @@ class AuthenticationController extends AbstractController {
                 $authenticationService->authenticate();
 
                 $authenticationResult = $authenticationService->getAuthenticationResult();
-//                var_dump($authenticationResult);
+
                 if ($authenticationResult->isValid()) {
                     /** @var \App\Vacation\Domain\Model\User $user */
                     $user = $authenticationService->getIdentity();
@@ -63,9 +63,8 @@ class AuthenticationController extends AbstractController {
                         $token = $authenticationService->getAdapter()->getToken();
                         $this->getView()->assign('token', $token);
                     }
-//                    $this->getView()->assign('authenticationResult', $authenticationResult);
                     $message = 'Successful login';
-                    $success = true;
+                    $success = TRUE;
                 } else {
                     throw new \Exception(\join(' ', $authenticationResult->getMessages()), 403);
                 }
@@ -73,7 +72,7 @@ class AuthenticationController extends AbstractController {
                 throw new \Exception('Wrong Method : ' . $method, 405);
             }
         } catch (\Exception $e) {
-            $success = false;
+            $success = FALSE;
             $message = $e->getMessage();
             $this->getKlein()->response()->code($e->getCode());
         }

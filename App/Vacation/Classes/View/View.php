@@ -12,7 +12,7 @@ namespace App\Vacation\View;
  * Class View
  * @package App\Vacation\View
  */
-class View extends \App\Core\View\View{
+class View extends \App\Core\View\View {
 
     /**
      * @throws \Exception

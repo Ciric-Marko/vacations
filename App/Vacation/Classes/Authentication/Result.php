@@ -1,32 +1,33 @@
 <?php
+
 namespace App\Vacation\Authentication;
 
-class Result
-{
+class Result {
+
     /**
      * General Failure
      */
-    const FAILURE                        = 0;
+    const FAILURE = 0;
     /**
      * Failure due to identity not being found.
      */
-    const FAILURE_IDENTITY_NOT_FOUND     = -1;
+    const FAILURE_IDENTITY_NOT_FOUND = -1;
     /**
      * Failure due to identity being ambiguous.
      */
-    const FAILURE_IDENTITY_AMBIGUOUS     = -2;
+    const FAILURE_IDENTITY_AMBIGUOUS = -2;
     /**
      * Failure due to invalid credential being supplied.
      */
-    const FAILURE_CREDENTIAL_INVALID     = -3;
+    const FAILURE_CREDENTIAL_INVALID = -3;
     /**
      * Failure due to uncategorized reasons.
      */
-    const FAILURE_UNCATEGORIZED          = -4;
+    const FAILURE_UNCATEGORIZED = -4;
     /**
      * Authentication success.
      */
-    const SUCCESS                        = 1;
+    const SUCCESS = 1;
     /**
      * Authentication result code
      *
@@ -47,46 +48,47 @@ class Result
      * @var array
      */
     protected $messages;
+
     /**
      * Sets the result code, identity, and failure messages
      *
-     * @param  int     $code
-     * @param  mixed   $identity
-     * @param  array   $messages
+     * @param  int $code
+     * @param  mixed $identity
+     * @param  array $messages
      */
-    public function __construct($code, $identity, array $messages = [])
-    {
-        $this->code     = (int) $code;
+    public function __construct($code, $identity, array $messages = []) {
+        $this->code = (int)$code;
         $this->identity = $identity;
         $this->messages = $messages;
     }
+
     /**
      * Returns whether the result represents a successful authentication attempt
      *
      * @return bool
      */
-    public function isValid()
-    {
+    public function isValid() {
         return ($this->code > 0);
     }
+
     /**
      * getCode() - Get the result code for this authentication attempt
      *
      * @return int
      */
-    public function getCode()
-    {
+    public function getCode() {
         return $this->code;
     }
+
     /**
      * Returns the identity used in the authentication attempt
      *
      * @return mixed
      */
-    public function getIdentity()
-    {
+    public function getIdentity() {
         return $this->identity;
     }
+
     /**
      * Returns an array of string reasons why the authentication attempt was unsuccessful
      *
@@ -94,8 +96,7 @@ class Result
      *
      * @return array
      */
-    public function getMessages()
-    {
+    public function getMessages() {
         return $this->messages;
     }
 }

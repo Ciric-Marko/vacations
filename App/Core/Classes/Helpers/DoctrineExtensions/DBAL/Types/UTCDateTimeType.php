@@ -21,7 +21,7 @@ class UTCDateTimeType extends DateTimeType
 
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        if (null === $value || $value instanceof \DateTime) {
+        if (NULL === $value || $value instanceof \DateTime) {
             return $value;
         }
 
